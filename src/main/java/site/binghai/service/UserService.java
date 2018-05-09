@@ -15,4 +15,10 @@ public class UserService extends BaseService<User> {
         user.setPass(pass);
         return queryOne(user);
     }
+
+    public User findByEmail(String email) {
+        User user = User.builder().build();
+        user.setEmail(email);
+        return queryOne(user);
+    }
 }

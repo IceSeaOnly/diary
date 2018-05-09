@@ -50,7 +50,12 @@ public class LoginController extends BaseController<User> {
 
         if(!pass.equals(repass)){return fail("两次密码校验不一致!");}
 
-        User user = User.builder()
+        User user = userService.findByEmail(email);
+        if(user != null){
+            return fail(email+" 已经注册!");
+        }
+
+        user = User.builder()
                 .email(email)
                 .pass(pass)
                 .userName(userName)
