@@ -1,6 +1,5 @@
 package site.binghai.controller.user;
 
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +32,16 @@ public class LoginController extends BaseController<User> {
             return fail("用户名/密码错误!");
         }
 
-        getSession().setAttribute("user",user);
+        getSession().setAttribute("user", user);
 
+        user.setPass(null);
         return success(user, null);
+    }
+
+    @PostMapping("logout")
+    public Object userLogout() {
+        getSession().invalidate();
+        return success();
     }
 
     @PostMapping("userRegister")
@@ -48,11 +54,13 @@ public class LoginController extends BaseController<User> {
             return fail("输入不完整");
         }
 
-        if(!pass.equals(repass)){return fail("两次密码校验不一致!");}
+        if (!pass.equals(repass)) {
+            return fail("两次密码校验不一致!");
+        }
 
         User user = userService.findByEmail(email);
-        if(user != null){
-            return fail(email+" 已经注册!");
+        if (user != null) {
+            return fail(email + " 已经注册!");
         }
 
         user = User.builder()
