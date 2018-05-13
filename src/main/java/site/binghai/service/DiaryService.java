@@ -19,7 +19,12 @@ public class DiaryService extends BaseService<Diary> {
         Diary diary = new Diary();
         diary.setUserId(user.getId());
         List<Diary> ls = query(diary);
-        ls.subList((page-1)*pageSize,pageSize*page);
+        int start = (page - 1) * pageSize;
+        int end = page * pageSize;
+        if (start >= ls.size()) return emptyList();
+        if (end > ls.size()) end = ls.size();
+
+        ls.subList(start, end);
         return ls;
     }
 }
