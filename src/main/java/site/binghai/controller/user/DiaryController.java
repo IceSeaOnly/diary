@@ -1,7 +1,9 @@
 package site.binghai.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import site.binghai.controller.BaseController;
 import site.binghai.entity.Diary;
@@ -26,7 +28,8 @@ public class DiaryController extends BaseController<Diary> {
     }
 
     @Override
-    public Object list(Integer page, Integer pageSize) {
+    @GetMapping("list")
+    public Object list(@RequestParam Integer page,@RequestParam Integer pageSize) {
         return success(diaryService.findByUser(getUser(), page, pageSize), null);
     }
 
