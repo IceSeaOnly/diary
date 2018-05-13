@@ -98,6 +98,13 @@ public abstract class BaseService<T extends BaseEntity> extends BaseBean {
         return getDao().findAll(ex);
     }
 
+    public List<T> pageQuery(T example,int page,int pageSize) {
+        example.setCreated(null);
+        example.setCreatedTime(null);
+        Example<T> ex = Example.of(example);
+        return getDao().findAll(ex,new PageRequest(page,pageSize)).getContent();
+    }
+
     public T queryOne(T example) {
         example.setCreated(null);
         example.setCreatedTime(null);

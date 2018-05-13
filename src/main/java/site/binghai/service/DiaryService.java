@@ -15,16 +15,10 @@ public class DiaryService extends BaseService<Diary> {
 
     public List<Diary> findByUser(User user, Integer page, Integer pageSize) {
         page = page < 1 ? 1 : page;
-
+        pageSize = pageSize > 100 ? 100 : pageSize;
         Diary diary = new Diary();
         diary.setUserId(user.getId());
-        List<Diary> ls = query(diary);
-        int start = (page - 1) * pageSize;
-        int end = page * pageSize;
-        if (start >= ls.size()) return emptyList();
-        if (end > ls.size()) end = ls.size();
-
-        ls.subList(start, end);
+        List<Diary> ls = pageQuery(diary, page, pageSize);
         return ls;
     }
 }
