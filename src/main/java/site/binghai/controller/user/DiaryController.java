@@ -28,10 +28,13 @@ public class DiaryController extends BaseController<Diary> {
     }
 
     @GetMapping("list")
-    public Object list(Long cid,@RequestParam Long userId, @RequestParam Integer page, @RequestParam Integer pageSize) {
+    public Object list(Long cid, Long userId, Integer page, Integer pageSize) {
         if (cid != null) {
             return success(diaryService.findById(cid), null);
         }
+        page = page == null ? 0 : page;
+        pageSize = pageSize == null ? 10 : pageSize;
+        userId = userId == null ? getUser().getId() : userId;
         return success(diaryService.findByUser(userId, page, pageSize), null);
     }
 
