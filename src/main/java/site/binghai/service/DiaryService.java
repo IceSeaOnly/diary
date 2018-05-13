@@ -13,11 +13,11 @@ import java.util.List;
 @Service
 public class DiaryService extends BaseService<Diary> {
 
-    public List<Diary> findByUser(User user, Integer page, Integer pageSize) {
-        page = page < 1 ? 1 : page;
+    public List<Diary> findByUser(Long userId, Integer page, Integer pageSize) {
+        page = page < 0 ? 0 : page;
         pageSize = pageSize > 100 ? 100 : pageSize;
         Diary diary = new Diary();
-        diary.setUserId(user.getId());
+        diary.setUserId(userId);
         List<Diary> ls = pageQuery(diary, page, pageSize);
         return ls;
     }

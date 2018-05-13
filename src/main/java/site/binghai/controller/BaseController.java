@@ -47,17 +47,6 @@ public abstract class BaseController<T extends BaseEntity> extends BaseBean {
     }
 
 
-    @GetMapping("list")
-    public Object list(Integer page, Integer pageSize) {
-        try {
-            beforList();
-            return getService().findAll(page == null ? 0 : page, pageSize == null ? 10 : pageSize);
-        } catch (Exception e) {
-            logger.error("list failed!", e);
-            return fail(e.getMessage());
-        }
-    }
-
     @PostMapping("update")
     public Object update(@RequestBody Map map) {
         try {

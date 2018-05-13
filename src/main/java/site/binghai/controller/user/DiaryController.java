@@ -28,11 +28,11 @@ public class DiaryController extends BaseController<Diary> {
     }
 
     @GetMapping("list")
-    public Object list(Long cid, @RequestParam Integer page, @RequestParam Integer pageSize) {
+    public Object list(Long cid,@RequestParam Long userId, @RequestParam Integer page, @RequestParam Integer pageSize) {
         if (cid != null) {
             return success(diaryService.findById(cid), null);
         }
-        return success(diaryService.findByUser(getUser(), page, pageSize), null);
+        return success(diaryService.findByUser(userId, page, pageSize), null);
     }
 
     @Override
