@@ -29,6 +29,7 @@ public class Diary extends BaseEntity {
     @Column(name = "class")
     @JSONField(name = "class")
     private Long clazz;
+    private Integer praiseMark;
 
     @Transient
     private boolean praise; // 点赞标记

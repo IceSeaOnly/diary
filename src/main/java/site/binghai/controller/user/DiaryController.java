@@ -65,16 +65,23 @@ public class DiaryController extends BaseController<Diary> {
             record = new PraiseRecord();
             record.setUserId(userId);
             record.setDiaryId(cid);
-            return success(praiseRecordService.save(record), null);
+            Diary diary = diaryService.findById(cid);
+            diary.setPraiseMark(diary.getPraiseMark() + 1);
+            diaryService.update(diary);
+            praiseRecordService.save(record);
+            return success(diary, null);
         } else {
+            Diary diary = diaryService.findById(cid);
+            diary.setPraiseMark(diary.getPraiseMark() - 1);
+            diaryService.update(diary);
             praiseRecordService.delete(record.getId());
+            return success(diary, null);
         }
-
-        return success();
     }
 
     @Override
     protected void beforeAdd(Map map) throws Exception {
         map.put("userId", getUser().getId());
+        map.put("praiseMark", 0);
     }
 }

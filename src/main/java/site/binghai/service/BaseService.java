@@ -119,6 +119,13 @@ public abstract class BaseService<T extends BaseEntity> extends BaseBean {
         return getDao().findAll(ex, Sort.by(desc ? Sort.Direction.DESC : Sort.Direction.ASC, sortField));
     }
 
+    public List<T> sortQuery(T example,int page,int pageSize, String sortField, Boolean desc) {
+        example.setCreated(null);
+        example.setCreatedTime(null);
+        Example<T> ex = Example.of(example);
+        return getDao().findAll(ex, Sort.by(desc ? Sort.Direction.DESC : Sort.Direction.ASC, sortField));
+    }
+
     public List<T> findAll(int limit) {
         return getDao().findAll(new PageRequest(0, limit)).getContent();
     }
