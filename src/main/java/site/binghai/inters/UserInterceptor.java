@@ -22,16 +22,8 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
             }
         }
 
-
-        response.getWriter().write(fail("请先登录!").toJSONString());
+        response.sendRedirect("/schoolnote/html/user/login.html");
         return false;
     }
 
-    public JSONObject fail(String err) {
-        JSONObject object = new JSONObject();
-        object.put("status", "FAIL");
-        object.put("msg", err);
-        object.put("code", 1);
-        return object;
-    }
 }
