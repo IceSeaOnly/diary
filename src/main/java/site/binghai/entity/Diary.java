@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by IceSea on 2018/5/5.
@@ -32,4 +29,7 @@ public class Diary extends BaseEntity {
     @Column(name = "class")
     @JSONField(name = "class")
     private Long clazz;
+
+    @Transient
+    private boolean praise; // 点赞标记
 }
