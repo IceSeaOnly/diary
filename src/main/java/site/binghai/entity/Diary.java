@@ -24,6 +24,7 @@ public class Diary extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id;
+    private Long userId;
     @Column(columnDefinition = "TEXT")
     private String content;
     @Column(columnDefinition = "TEXT")

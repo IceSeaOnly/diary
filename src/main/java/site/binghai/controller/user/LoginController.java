@@ -33,6 +33,8 @@ public class LoginController extends BaseController<User> {
             return fail("用户名/密码错误!");
         }
 
+        getSession().setAttribute("user",user);
+
         return success(user, null);
     }
 

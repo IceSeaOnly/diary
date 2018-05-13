@@ -9,6 +9,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import site.binghai.entity.Admin;
 import site.binghai.entity.BaseEntity;
+import site.binghai.entity.User;
 import site.binghai.service.BaseService;
 import site.binghai.utils.BaseBean;
 
@@ -126,6 +127,11 @@ public abstract class BaseController<T extends BaseEntity> extends BaseBean {
     public Admin getAdmin() {
         Object obj = getServletRequest().getSession().getAttribute("admin");
         return obj == null ? null : (Admin) obj;
+    }
+
+    public User getUser() {
+        Object obj = getServletRequest().getSession().getAttribute("user");
+        return obj == null ? null : (User) obj;
     }
 
     public JSONObject fail(String err) {
