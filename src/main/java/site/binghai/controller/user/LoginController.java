@@ -1,10 +1,7 @@
 package site.binghai.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import site.binghai.controller.BaseController;
 import site.binghai.entity.User;
 import site.binghai.service.BaseService;
@@ -38,7 +35,7 @@ public class LoginController extends BaseController<User> {
         return success(user, null);
     }
 
-    @PostMapping("logout")
+    @GetMapping("logout")
     public Object userLogout() {
         getSession().invalidate();
         return success();

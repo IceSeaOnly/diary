@@ -20,8 +20,16 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
-        response.sendRedirect("/schoolnote/html/user/login.html");
+        response.getWriter().write(fail("NOT LOGIN").toJSONString());
         return false;
+    }
+
+    public JSONObject fail(String err) {
+        JSONObject object = new JSONObject();
+        object.put("status", "FAIL");
+        object.put("msg", err);
+        object.put("code", 1);
+        return object;
     }
 
 }
