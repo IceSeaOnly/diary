@@ -47,7 +47,7 @@ public class DiaryController extends BaseController<Diary> {
         return success(ls, null);
     }
 
-    private void moreInfo(Diary diary) {
+    public void moreInfo(Diary diary) {
         Long userId = getUser().getId();
         PraiseRecord record = praiseRecordService.findByCidAndUserId(diary.getId(), userId);
         if (record == null) {
