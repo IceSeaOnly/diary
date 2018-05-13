@@ -26,8 +26,7 @@ public class LoginController extends BaseController<User> {
 
     @PostMapping("login")
     public Object userLogin(@RequestParam String email,
-                            @RequestParam String pass,
-                            @RequestParam String verCode) {
+                            @RequestParam String pass) {
 
         User user = userService.findByEmailAndPass(email, pass);
         if (user == null) {
@@ -41,10 +40,9 @@ public class LoginController extends BaseController<User> {
     public Object userReg(@RequestParam String email,
                           @RequestParam String pass,
                           @RequestParam String repass,
-                          @RequestParam String userName,
-                          @RequestParam String verCode
+                          @RequestParam String userName
     ) {
-        if (!noEmptyString(email, pass, repass, userName, verCode)) {
+        if (!noEmptyString(email, pass, repass, userName)) {
             return fail("输入不完整");
         }
 
