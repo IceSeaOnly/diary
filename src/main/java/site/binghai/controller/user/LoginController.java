@@ -86,11 +86,6 @@ public class LoginController extends BaseController<User> {
     }
 
     @Override
-    protected void beforList() throws Exception {
-//        ExceptionGenerator.notImplement();
-    }
-
-    @Override
     protected BaseService getService() {
         return userService;
     }

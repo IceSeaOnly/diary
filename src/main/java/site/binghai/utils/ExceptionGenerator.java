@@ -11,4 +11,8 @@ public class ExceptionGenerator {
     public static Exception notImplement() throws Exception {
         throw  new Exception("can not call the method.");
     }
+
+    public static Exception identifyFailed() throws Exception {
+        throw new Exception("identify failed!");
+    }
 }

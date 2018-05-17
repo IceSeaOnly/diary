@@ -25,9 +25,6 @@ public abstract class BaseController<T extends BaseEntity> extends BaseBean {
 
     protected abstract BaseService<T> getService();
 
-    protected void beforList() throws Exception {
-    }
-
     protected void beforeAdd(Map map) throws Exception {
     }
 

@@ -27,6 +27,10 @@ public class User extends BaseEntity {
     private String userName;
     private String pass;
 
+    private String personalitySignature; // 个性签名
+    private String gender;
+    private String city;
+
 
     public Long getUid(){return id;}
 }
