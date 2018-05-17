@@ -1,9 +1,7 @@
 package site.binghai.controller.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import site.binghai.controller.BaseController;
 import site.binghai.entity.User;
 import site.binghai.service.BaseService;
