@@ -14,7 +14,7 @@ import java.util.Map;
  * Created by IceSea on 2018/5/17.
  * GitHub: https://github.com/IceSeaOnly
  */
-@RequestMapping("/admin/info/")
+@RequestMapping("/user/info/")
 @RestController
 public class InfoController extends BaseController<User> {
     @Autowired
