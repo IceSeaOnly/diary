@@ -39,6 +39,8 @@ public class InfoController extends BaseController<User> {
     @GetMapping("info")
     public Object getInfo() {
         User user = getUser();
+        user = userService.findById(user.getId());
+        getSession().setAttribute("user",user);
         user.setPass(null);
         return success(user, null);
     }
