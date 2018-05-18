@@ -52,7 +52,7 @@ public abstract class BaseController<T extends BaseEntity> extends BaseBean {
             afterUpdate(t);
             return success(t, "SUCCESS");
         } catch (Exception e) {
-            logger.error("update failed!", e);
+            logger.error("update failed!{}", map, e);
             return fail(e.getMessage());
         }
     }
@@ -65,7 +65,7 @@ public abstract class BaseController<T extends BaseEntity> extends BaseBean {
             afterDelete(id);
             return success();
         } catch (Exception e) {
-            logger.error("delete failed!", e);
+            logger.error("delete failed! id={}", id, e);
             return fail(e.getMessage());
         }
     }
@@ -79,7 +79,7 @@ public abstract class BaseController<T extends BaseEntity> extends BaseBean {
             afterAdd(t);
             return success(t, "SUCCESS");
         } catch (Exception e) {
-            logger.error("add failed!", e);
+            logger.error("add failed! {}", map, e);
             return fail(e.getMessage());
         }
     }
