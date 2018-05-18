@@ -27,16 +27,19 @@ public class InfoController extends BaseController<User> {
 
     @Override
     protected void beforeUpdate(Map map) throws Exception {
-        Long id = getLong(map,"id");
-        if(!getUser().getId().equals(id)){
+        Long id = getLong(map, "id");
+        if (!getUser().getId().equals(id)) {
+            logger.error("user {} want to update user {},identify failed!", getUser(), map);
             throw ExceptionGenerator.identifyFailed();
         }
+        User user = userService.findById(id);
+        map.put("pass", user.getPass());
     }
 
     @GetMapping("info")
-    public Object getInfo(){
+    public Object getInfo() {
         User user = getUser();
         user.setPass(null);
-        return success(user,null);
+        return success(user, null);
     }
 }
