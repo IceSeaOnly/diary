@@ -1,5 +1,6 @@
 package site.binghai.service;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
 import site.binghai.entity.User;
 
@@ -20,5 +21,15 @@ public class UserService extends BaseService<User> {
         User user = User.builder().build();
         user.setEmail(email);
         return queryOne(user);
+    }
+
+    public JSONObject getSimpleUserInfoById(Long userId) {
+        User user = findById(userId);
+        JSONObject object = newJSONObject();
+        object.put("id", user.getId());
+        object.put("email", user.getEmail());
+        object.put("userName", user.getUserName());
+        object.put("img", user.getImg());
+        return object;
     }
 }

@@ -1,5 +1,7 @@
 package site.binghai.controller.user;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import site.binghai.controller.BaseController;
 import site.binghai.entity.Diary;
 import site.binghai.service.BaseService;
 import site.binghai.service.DiaryService;
+import site.binghai.service.UserService;
 
 import java.util.List;
 
@@ -23,6 +26,8 @@ public class WorldController extends BaseController {
     private DiaryController diaryController;
     @Autowired
     private DiaryService diaryService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("worldWild")
     public Object worldWild(@RequestParam Integer page, @RequestParam Integer pageSize) {
@@ -30,7 +35,23 @@ public class WorldController extends BaseController {
         if (getUser() != null) {
             diaryList.forEach(diaryController::moreInfo);
         }
-        return success(diaryList, null);
+        JSONObject data = newJSONObject();
+        data.put("list", makeItemList(diaryList));
+        Long all = diaryService.count();
+        data.put("total", all);
+        data.put("totalPage", all / pageSize + 1);
+        return success(data, null);
+    }
+
+    private JSONArray makeItemList(List<Diary> diaryList) {
+        JSONArray array = newJSONArray();
+        for (Diary diary : diaryList) {
+            JSONObject item = newJSONObject();
+            item.put("data", diary);
+            item.put("owner", userService.getSimpleUserInfoById(diary.getUserId()));
+            array.add(item);
+        }
+        return array;
     }
 
     @Override
