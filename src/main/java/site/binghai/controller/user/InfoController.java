@@ -37,10 +37,16 @@ public class InfoController extends BaseController<User> {
     }
 
     @GetMapping("info")
-    public Object getInfo() {
+    public Object getInfo(Long uid) {
+        if (uid != null) {
+            Object obj = userService.getSimpleUserInfoById(uid);
+            if (obj == null) return fail("用户不存在!");
+            return success(obj, null);
+        }
+
         User user = getUser();
         user = userService.findById(user.getId());
-        getSession().setAttribute("user",user);
+        getSession().setAttribute("user", user);
         user.setPass(null);
         return success(user, null);
     }

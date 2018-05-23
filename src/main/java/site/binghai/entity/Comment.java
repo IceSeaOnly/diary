@@ -20,6 +20,9 @@ public class Comment extends BaseEntity {
     private Long uid;
     private Long cid;
     private Long toId;
+    private String uName;
+    private String toName;
+
     @Column(columnDefinition = "TEXT")
     private String content;
 }

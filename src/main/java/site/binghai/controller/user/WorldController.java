@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import site.binghai.controller.BaseController;
 import site.binghai.entity.Diary;
 import site.binghai.service.BaseService;
+import site.binghai.service.CommentService;
 import site.binghai.service.DiaryService;
 import site.binghai.service.UserService;
 
@@ -28,6 +29,8 @@ public class WorldController extends BaseController {
     private DiaryService diaryService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("worldWild")
     public Object worldWild(@RequestParam Integer page, @RequestParam Integer pageSize) {
@@ -52,6 +55,11 @@ public class WorldController extends BaseController {
             array.add(item);
         }
         return array;
+    }
+
+    @GetMapping("commentList")
+    public Object list(@RequestParam Long cid) {
+        return success(commentService.findByCid(cid), null);
     }
 
     @Override
